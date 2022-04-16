@@ -3,12 +3,7 @@
 # ###
 
 from django.db import models
-
-def file_upload_to(instance, filename):
-    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
-    return '{0}/{1}'.format(instance, filename)
-
-class Books(models.model):
+class Books(models.Model):
     """
     Model for Books related details
     """
@@ -16,11 +11,10 @@ class Books(models.model):
     # The owning model
     book_name = models.CharField(max_length=100, blank=False, null=False)
     description = models.TextField(null=True, blank=True)
-    image_link = models.ImageField(upload_to=file_upload_to, blank=True,
-                                     null=True, default=None)
+    image_link = models.ImageField( blank=True, null=True)
 
     def __str__(self):
         return self.book_name
-
     class Meta:
+        verbose_name_plural = 'Books'
         ordering = ['-id']   # i.e., newest first
