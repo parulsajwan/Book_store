@@ -11,20 +11,30 @@ from rest_framework import generics
 
 
 from store.models import FavouriteBooks
-from store.serializers.FavouriteBooksSerializer import FavouriteBooksSerializer
+from store.serializers.FavouriteBooksSerializer import (
+    FavouriteBooksSerializer,
+    FavouriteBooksDetailSerializer,
+)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class FavouriteBooksListCreateView(generics.ListCreateAPIView):
     queryset = FavouriteBooks.objects.get_queryset()
-    serializer_class = FavouriteBooksSerializer
     permission_classes = [IsAuthenticated]
     session_classes = [SessionAuthentication]
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return FavouriteBooksSerializer
+        return FavouriteBooksDetailSerializer
 
 @method_decorator(csrf_exempt, name='dispatch')
 class FavouriteBookRetrieveUpdateView(generics.RetrieveUpdateAPIView):
     queryset = FavouriteBooks.objects.get_queryset()
-    serializer_class = FavouriteBooksSerializer
     permission_classes = [IsAuthenticated]
     session_classes = [SessionAuthentication]
-
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return FavouriteBooksDetailSerializer
+        return FavouriteBooksSerializer
     
