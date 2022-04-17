@@ -1,7 +1,7 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 
 urlpatterns = [
-    url('customer/', include('store.urls.CustomerUrls')),
-    url('favbook/', include('store.urls.FavouriteBooksUrls')),
-    url('books/', include('store.urls.BooksUrls')),
+    path('customer/', include('store.urls.CustomerUrls')),
+    path('favbook/', include('store.urls.FavouriteBooksUrls')),
+    path('books/', include('store.urls.BooksUrls')),
    ]
