@@ -1,12 +1,8 @@
 # ###
-# Model classes for the Customer object
+# FavouriteBooks Model classes 
 # ###
 
 from django.db import models
-
-def file_upload_to(instance, filename):
-    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
-    return '{0}/{1}'.format(instance, filename)
 
 class FavouriteBooks(models.Model):
     """
